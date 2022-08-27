@@ -8,6 +8,7 @@ import com.company.library.model.Users;
 import com.company.library.repository.UsersRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,7 +22,7 @@ public class UsersService {
         this.converter = converter;
     }
 
-    protected UserDto createUser(UserRegistrationRequest request){
+    public UserDto userRegistration(UserRegistrationRequest request){
         checkUserAlreadyExistOrNot(request.getPin());
         Users user = new Users(
                 request.getName(),
@@ -29,6 +30,10 @@ public class UsersService {
                 request.getPin()
         );
         return converter.convert(repository.save(user));
+    }
+
+    public List<UserDto> getAllUsers(){
+        return converter.convert(repository.findAll());
     }
 
     private void checkUserAlreadyExistOrNot(String pin){

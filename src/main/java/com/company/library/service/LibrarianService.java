@@ -1,11 +1,9 @@
 package com.company.library.service;
 
 import com.company.library.dto.LibrarianDto;
-import com.company.library.dto.UserDto;
 import com.company.library.dto.converter.LibrarianDtoConverter;
 import com.company.library.dto.request.CreateLibrarianRequest;
 import com.company.library.dto.request.SignInRequest;
-import com.company.library.dto.request.UserRegistrationRequest;
 import com.company.library.exception.LibrarianAlreadyExistException;
 import com.company.library.exception.LibrarianNotFoundException;
 import com.company.library.model.Librarian;
@@ -22,14 +20,15 @@ public class LibrarianService {
     private final LibrarianDtoConverter converter;
     private final PasswordEncoder passwordEncoder;
 
-    private final UsersService usersService;
     private final AuthenticationService authenticationService;
 
-    public LibrarianService(LibrarianRepository repository, LibrarianDtoConverter converter, PasswordEncoder passwordEncoder, UsersService usersService, AuthenticationService authenticationService) {
+    public LibrarianService(LibrarianRepository repository,
+                            LibrarianDtoConverter converter,
+                            PasswordEncoder passwordEncoder,
+                            AuthenticationService authenticationService) {
         this.repository = repository;
         this.converter = converter;
         this.passwordEncoder = passwordEncoder;
-        this.usersService = usersService;
         this.authenticationService = authenticationService;
     }
 
@@ -47,12 +46,6 @@ public class LibrarianService {
     public String signIn(SignInRequest request){
         return authenticationService.singInAndReturnJWT(request);
     }
-
-    public UserDto userRegistration(UserRegistrationRequest request){
-        return usersService.createUser(request);
-    }
-
-
 
     public LibrarianDto findLibrarianByEmail(String email){
         return converter.convert(findLibrarian(email));
