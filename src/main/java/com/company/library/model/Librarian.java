@@ -2,6 +2,7 @@ package com.company.library.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +17,10 @@ public class Librarian {
 
     private String name;
     private String surname;
+
+    @Column(nullable = false,unique = true)
     private String email;
+
     private String password;
 
     public Librarian() {

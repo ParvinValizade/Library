@@ -13,6 +13,7 @@ public class Users {
     private String name;
     private String surname;
 
+    @Column(nullable = false,unique = true)
     private String pin;
 
     @ManyToMany
@@ -31,6 +32,12 @@ public class Users {
         this.surname = surname;
         this.pin = pin;
         this.books = books;
+    }
+
+    public Users(String name, String surname, String pin) {
+        this.name = name;
+        this.surname = surname;
+        this.pin = pin;
     }
 
     public Long getId() {
