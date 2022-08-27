@@ -3,6 +3,7 @@ package com.company.library.service;
 import com.company.library.dto.CategoryDto;
 import com.company.library.dto.converter.CategoryDtoConverter;
 import com.company.library.dto.request.CreateCategoryRequest;
+import com.company.library.exception.CategoryNotFoundException;
 import com.company.library.model.Category;
 import com.company.library.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,13 @@ public class CategoryService {
 
     public List<CategoryDto> getAllCategories(){
         return converter.convert(repository.findAll());
+    }
+
+
+    protected Category findCategoryById(Long categoryId){
+        return repository.findById(categoryId)
+                .orElseThrow(()->new CategoryNotFoundException("Category couldn't be found by following categoryId "
+                +categoryId));
+
     }
 }

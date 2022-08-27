@@ -35,6 +35,13 @@ public class Book {
         this.users = users;
     }
 
+    public Book(String name, String author, Category category, Integer stock) {
+        this.name = name;
+        this.author = author;
+        this.category = category;
+        this.stock = stock;
+    }
+
     public Long getId() {
         return id;
     }
