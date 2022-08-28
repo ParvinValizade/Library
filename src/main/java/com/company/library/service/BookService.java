@@ -39,7 +39,7 @@ public class BookService {
     }
 
     public List<BookDto> getAllBooks(){
-        return converter.concert(repository.findAll());
+        return converter.convert(repository.findAll());
     }
 
     public BookDto getBookByName(String bookName){
@@ -50,6 +50,11 @@ public class BookService {
         Book book = findBookById(bookId);
         book.setStock(request.getStock());
         return converter.convert(repository.save(book));
+    }
+
+    public List<BookDto> getAllBooksByCategoryName(String categoryName){
+       Category category = categoryService.findCategoryByName(categoryName);
+       return converter.convert(repository.findAllByCategory(category));
     }
 
     private Book findBookByName(String bookName){

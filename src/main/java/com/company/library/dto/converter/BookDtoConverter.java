@@ -20,7 +20,7 @@ public class BookDtoConverter {
         );
     }
 
-    public List<BookDto> concert(List<Book> fromList){
+    public List<BookDto> convert(List<Book> fromList){
         return fromList.stream()
                 .map(this::convert).collect(Collectors.toList());
     }

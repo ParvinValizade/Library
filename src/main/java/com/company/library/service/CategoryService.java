@@ -38,4 +38,10 @@ public class CategoryService {
                 +categoryId));
 
     }
+
+    protected Category findCategoryByName(String name){
+        return repository.findByName(name)
+                .orElseThrow(()->new CategoryNotFoundException("Category couldn't be found by following name: "
+                        +name));
+    }
 }

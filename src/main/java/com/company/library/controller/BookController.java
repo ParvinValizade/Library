@@ -45,4 +45,10 @@ public class BookController {
                                                @RequestBody UpdateStockRequest request){
         return ResponseEntity.ok(bookService.updateStock(bookId,request));
     }
+
+    @GetMapping("getAllBooksByCategoryName/{categoryName}")
+    @Operation(summary = "Find all books by categoryName", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<List<BookDto>> getAllBooksByCategoryName(@PathVariable String categoryName){
+        return ResponseEntity.ok(bookService.getAllBooksByCategoryName(categoryName));
+    }
 }
