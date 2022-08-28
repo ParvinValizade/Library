@@ -30,4 +30,24 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<?> bookNotFoundException(BookNotFoundException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> userNotFoundException(UserNotFoundException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(StockEqualsZeroException.class)
+    public ResponseEntity<?> stockEqualsZeroException(StockEqualsZeroException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AnyRowNotFoundException.class)
+    public ResponseEntity<?> anyRowNotFoundException(AnyRowNotFoundException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+
 }

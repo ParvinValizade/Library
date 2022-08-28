@@ -8,13 +8,13 @@ import java.time.LocalDate;
 public class BooksOfUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id",unique = false)
     private Long userId;
 
-    @Column(name = "book_id")
+    @Column(name = "book_id",unique = false)
     private Long bookId;
 
     @Column(name = "date_of_giving_to_user")
@@ -32,6 +32,12 @@ public class BooksOfUser {
         this.bookId = bookId;
         this.dateOfGivingToUser = dateOfGivingToUser;
         this.dateOfReturnFromUser = dateOfReturnFromUser;
+    }
+
+    public BooksOfUser(Long userId, Long bookId, LocalDate dateOfGivingToUser) {
+        this.userId = userId;
+        this.bookId = bookId;
+        this.dateOfGivingToUser = dateOfGivingToUser;
     }
 
     public Long getId() {

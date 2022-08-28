@@ -2,6 +2,7 @@ package com.company.library.controller;
 
 import com.company.library.dto.BookDto;
 import com.company.library.dto.request.BookRegistrationRequest;
+import com.company.library.dto.request.UpdateStockRequest;
 import com.company.library.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,5 +31,18 @@ public class BookController {
     @Operation(summary = "Show All Books", security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<List<BookDto>> getAllBooks(){
         return ResponseEntity.ok(bookService.getAllBooks());
+    }
+
+    @GetMapping("searchBookByName/{bookName}")
+    @Operation(summary = "Search Book", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<BookDto> getBookByName(@PathVariable String bookName){
+        return ResponseEntity.ok(bookService.getBookByName(bookName));
+    }
+
+    @PutMapping("updateStock/{bookId}")
+    @Operation(summary = "Update Stock", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<BookDto> updateStock(@PathVariable Long bookId,
+                                               @RequestBody UpdateStockRequest request){
+        return ResponseEntity.ok(bookService.updateStock(bookId,request));
     }
 }

@@ -4,6 +4,7 @@ import com.company.library.dto.UserDto;
 import com.company.library.dto.converter.UserDtoConverter;
 import com.company.library.dto.request.UserRegistrationRequest;
 import com.company.library.exception.UserAlreadyExistException;
+import com.company.library.exception.UserNotFoundException;
 import com.company.library.model.Users;
 import com.company.library.repository.UsersRepository;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,11 @@ public class UsersService {
     private void checkUserAlreadyExistOrNot(String pin){
         Optional<Users> user = repository.findByPin(pin);
         user.ifPresent(user1 -> {throw new UserAlreadyExistException("User Already Exist");});
+    }
+
+    protected Users findUserById(Long userId){
+        return repository.findById(userId)
+                .orElseThrow(()->new UserNotFoundException("User couldn't be found by following id: "+userId));
     }
 
 }
