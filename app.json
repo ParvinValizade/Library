@@ -1,0 +1,8 @@
+{
+  "name": "library-system",
+  "buildpacks": [
+    {
+      "url": "heroku/gradle"
+    }
+  ]
+}
