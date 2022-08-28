@@ -5,6 +5,7 @@ import com.company.library.dto.converter.BooksOfUserDtoConverter;
 import com.company.library.dto.request.AssignBookToUserRequest;
 import com.company.library.dto.request.ReturnedBooksRegistrationRequest;
 import com.company.library.exception.AnyRowNotFoundException;
+import com.company.library.model.Book;
 import com.company.library.model.BooksOfUser;
 import com.company.library.repository.BooksOfUserRepository;
 import org.springframework.stereotype.Service;
@@ -40,10 +41,11 @@ public class BooksOfUserService {
 
     public List<BooksOfUserDto> returnedBooksRegistration(ReturnedBooksRegistrationRequest request){
         usersService.findUserById(request.getUserId());
-        bookService.findBookById(request.getBookId());
+        Book book = bookService.findBookById(request.getBookId());
         List<BooksOfUser> booksOfUserList = checkAnyDataExistOrNot(request.getUserId(),request.getBookId());
         booksOfUserList.forEach(booksOfUser ->
         {booksOfUser.setDateOfReturnFromUser(LocalDate.now());
+         bookService.increaseStock(book);
         repository.save(booksOfUser);});
         return converter.convert(booksOfUserList);
 

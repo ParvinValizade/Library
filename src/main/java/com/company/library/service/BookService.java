@@ -71,4 +71,8 @@ public class BookService {
            throw new StockEqualsZeroException("This book is currently out of stock");
        }
     }
+    protected void increaseStock(Book book){
+        book.setStock(book.getStock()+1);
+        repository.save(book);
+    }
 }
