@@ -2,6 +2,7 @@ package com.company.library.controller;
 
 import com.company.library.dto.BookDto;
 import com.company.library.dto.request.BookRegistrationRequest;
+import com.company.library.dto.request.SearchBookByCategoryNameRequest;
 import com.company.library.dto.request.UpdateStockRequest;
 import com.company.library.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +49,7 @@ public class BookController {
 
     @GetMapping("getAllBooksByCategoryName/{categoryName}")
     @Operation(summary = "Find all books by categoryName", security = @SecurityRequirement(name = "bearerAuth"))
-    public ResponseEntity<List<BookDto>> getAllBooksByCategoryName(@PathVariable String categoryName){
+    public ResponseEntity<List<BookDto>> getAllBooksByCategoryName(@PathVariable SearchBookByCategoryNameRequest categoryName){
         return ResponseEntity.ok(bookService.getAllBooksByCategoryName(categoryName));
     }
 }

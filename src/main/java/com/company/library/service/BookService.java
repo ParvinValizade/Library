@@ -3,6 +3,7 @@ package com.company.library.service;
 import com.company.library.dto.BookDto;
 import com.company.library.dto.converter.BookDtoConverter;
 import com.company.library.dto.request.BookRegistrationRequest;
+import com.company.library.dto.request.SearchBookByCategoryNameRequest;
 import com.company.library.dto.request.UpdateStockRequest;
 import com.company.library.exception.BookNotFoundException;
 import com.company.library.exception.StockEqualsZeroException;
@@ -52,8 +53,8 @@ public class BookService {
         return converter.convert(repository.save(book));
     }
 
-    public List<BookDto> getAllBooksByCategoryName(String categoryName){
-       Category category = categoryService.findCategoryByName(categoryName);
+    public List<BookDto> getAllBooksByCategoryName(SearchBookByCategoryNameRequest categoryName){
+       Category category = categoryService.findCategoryByName(categoryName.name());
        return converter.convert(repository.findAllByCategory(category));
     }
 
