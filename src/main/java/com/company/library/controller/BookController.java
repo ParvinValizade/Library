@@ -52,4 +52,11 @@ public class BookController {
     public ResponseEntity<List<BookDto>> getAllBooksByCategoryName(@PathVariable SearchBookByCategoryNameRequest categoryName){
         return ResponseEntity.ok(bookService.getAllBooksByCategoryName(categoryName));
     }
+
+    @DeleteMapping("deleteBookById/{bookId}")
+    @Operation(summary = "Delete Book", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<Void> deleteBookById(@PathVariable Long bookId){
+        bookService.deleteBook(bookId);
+        return ResponseEntity.ok().build();
+    }
 }

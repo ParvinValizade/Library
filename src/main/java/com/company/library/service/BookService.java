@@ -58,6 +58,11 @@ public class BookService {
        return converter.convert(repository.findAllByCategory(category));
     }
 
+    public void deleteBook(Long bookId){
+        findBookById(bookId);
+        repository.deleteById(bookId);
+    }
+
     private Book findBookByName(String bookName){
         return repository.findByName(bookName)
                 .orElseThrow(()->new BookNotFoundException("Book couldn't be found by following name: "+bookName));
